@@ -7,6 +7,7 @@ User = get_user_model()
 class Exercise(models.Model):
     title = models.CharField(max_length=50)
     muscle_group = models.CharField(max_length=50)
+    image = models.ImageField(upload_to='exercises/', null=True, blank=True)
 
 class Training(models.Model):
     title = models.CharField(max_length=50)
