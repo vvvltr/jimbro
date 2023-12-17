@@ -17,3 +17,4 @@ class Training(models.Model):
 class Workout(models.Model):
     date = models.DateField(null=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    training = models.ManyToManyField(Training)
