@@ -17,3 +17,7 @@ class RegistrationForm(forms.Form):
     class Meta:
         user = User
         fields = ('username', 'email', 'password', 'password_confirm')
+
+class AuthenticationForm(forms.Form):
+    username = forms.CharField()
+    password = forms.CharField(widget=forms.PasswordInput)

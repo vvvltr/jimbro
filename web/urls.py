@@ -5,6 +5,8 @@ import web.views
 
 
 urlpatterns = [
-    path('', web.views.main_view),
-    path('signup', web.views.registration_view)
+    path('', web.views.main_view, name='main'),
+    path('signup', web.views.registration_view, name='sign up'),
+    path('signin', web.views.authentication_view, name='sign in'),
+    path('profile', web.views.profile_view, name='profile')
 ]
