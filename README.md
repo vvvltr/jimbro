@@ -5,7 +5,7 @@
 ## Запуск проекта для разработки
 - 'py -m virtualenv venv' - создание виртуального окружение
 - 'venv\Script\activate.bat' - войти в venv
-- 'pip install -r reguirment.txt' - установка зависимостей
+- 'pip install -r requirements.txt' - установка зависимостей
 - 'py manage.py migrate' - применить миграции
 - 'python manage.py runserver' - запуск!
 
