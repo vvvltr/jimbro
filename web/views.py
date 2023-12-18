@@ -2,7 +2,7 @@ from datetime import datetime
 
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 
 from web import forms
 from web.models import User
@@ -49,3 +49,7 @@ def authentication_view(request):
 
 def profile_view(request):
     return render(request, "web/profile.html")
+
+def logout_view(request):
+    logout(request)
+    return redirect('main')
