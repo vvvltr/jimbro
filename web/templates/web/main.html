@@ -1,0 +1,6 @@
+{% extends 'web/base.html' %}
+{% block content %}
+{% if not user.is_anonymous %}
+        <h1>Hello, {{user.username}}!</h1>
+    {% endif %}
+{% endblock %}

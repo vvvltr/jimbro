@@ -1,0 +1,7 @@
+{% extends 'web/base.html' %}
+{% block content %}
+{% if not user.is_anonymous %}
+    <h3>Profile page</h3>
+    {{user.email}}
+{% endif %}
+{% endblock %}
