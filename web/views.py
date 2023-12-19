@@ -12,8 +12,9 @@ from web.models import User
 def main_view(request):
     date = datetime.now().year
     return render(request, 'web/main.html', {
-        "year" : date,
+        "year": date,
     })
+
 
 def registration_view(request):
     form = forms.RegistrationForm()
@@ -24,13 +25,14 @@ def registration_view(request):
             user = User(username=form.cleaned_data['username'], email=form.cleaned_data['email'])
             user.set_password(form.cleaned_data['password'])
             user.save()
-            success=True
+            success = True
             print(form.cleaned_data)
 
     return render(request, "web/registration.html", {
         "form": form,
-        "success" : success
+        "success": success
     })
+
 
 def authentication_view(request):
     form = forms.AuthenticationForm()
@@ -47,9 +49,26 @@ def authentication_view(request):
         "form": form
     })
 
+
 def profile_view(request):
     return render(request, "web/profile.html")
+
 
 def logout_view(request):
     logout(request)
     return redirect('main')
+
+
+def add_exercise_view(request):
+    form = forms.ExerciseForm()
+    return render(request, "web/add_exercise.html", {"form": form})
+
+
+def add_training_view(request):
+    form = forms.TrainingForm()
+    return render(request, "web/add_training.html", {"form": form})
+
+
+def add_workout_view(request):
+    form = forms.WorkoutForm()
+    return render(request, "web/add_workout.html")

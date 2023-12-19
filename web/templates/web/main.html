@@ -2,5 +2,6 @@
 {% block content %}
 {% if not user.is_anonymous %}
         <h1>Hello, {{user.username}}!</h1>
+    <a href="{% url 'add exercise' %}">Create new exercise</a>
     {% endif %}
 {% endblock %}

@@ -1,5 +1,9 @@
+from datetime import datetime
+
 from django import forms
 from django.contrib.auth import get_user_model
+
+from web import models
 
 User = get_user_model()
 class RegistrationForm(forms.Form):
@@ -21,3 +25,30 @@ class RegistrationForm(forms.Form):
 class AuthenticationForm(forms.Form):
     username = forms.CharField()
     password = forms.CharField(widget=forms.PasswordInput)
+
+class WorkoutForm(forms.ModelForm):
+    date = forms.DateTimeField(widget=forms.DateTimeInput(attrs={"type": "datetime-local"}))
+    user = User
+    class Meta:
+        model = models.Workout
+        fields = ('date', 'user')
+
+class TrainingForm(forms.ModelForm):
+    title = forms.CharField()
+    reps = forms.IntegerField()
+    sets = forms.IntegerField()
+
+
+class ExerciseForm(forms.ModelForm):
+    muscles = {
+        'chest',
+        'back',
+        'arms',
+        'abdominals',
+        'legs',
+        'shoulders'
+    }
+    muscle_group = forms.ChoiceField(choices=muscles)
+    class Meta:
+        model = models.Exercise
+        fields = ('title', 'muscle_group')
