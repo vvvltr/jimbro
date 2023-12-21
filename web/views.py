@@ -61,6 +61,11 @@ def logout_view(request):
 
 def add_exercise_view(request):
     form = forms.ExerciseForm()
+    if request.method == "POST":
+        form = forms.WorkoutForm(data=request.POST, initial={'user': request.user})
+        if form.is_valid():
+            form.save()
+            return redirect("main")
     return render(request, "web/add_exercise.html", {"form": form})
 
 
@@ -71,4 +76,9 @@ def add_training_view(request):
 
 def add_workout_view(request):
     form = forms.WorkoutForm()
-    return render(request, "web/add_workout.html")
+    if request.method == "POST":
+        form = forms.WorkoutForm(data=request.POST, initial={'user': request.user})
+        if form.is_valid():
+            form.save()
+            return redirect("main")
+    return render(request, "web/add_workout.html", {'form': form})

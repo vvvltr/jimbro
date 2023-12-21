@@ -4,6 +4,7 @@ from django import forms
 from django.contrib.auth import get_user_model
 
 from web import models
+from web.models import Training, Exercise
 
 User = get_user_model()
 class RegistrationForm(forms.Form):
@@ -29,14 +30,41 @@ class AuthenticationForm(forms.Form):
 class WorkoutForm(forms.ModelForm):
     date = forms.DateTimeField(widget=forms.DateTimeInput(attrs={"type": "datetime-local"}))
     user = User
+    ''' training = forms.ChoiceField(choices=[
+        Training(user,
+                 title='byceps curl standard set',
+                 reps=12,
+                 sets=3,
+                 exercise=Exercise(
+                     title='byceps curl',
+                     muscle_group='arms(pull)')),
+        Training(user,
+                 title='pull ups standard set',
+                 reps=12,
+                 sets=3,
+                 exercise=Exercise(
+                     title='wide grip pull ups',
+                     muscle_group='back and spine')
+                 )]
+    )'''
+    # training = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple)
+    def save(self, commit=True):
+        self.instance.user = self.initial['user']
+        return super().save(commit)
+
     class Meta:
         model = models.Workout
         fields = ('date', 'user')
 
 class TrainingForm(forms.ModelForm):
-    title = forms.CharField()
+    # title = forms.CharField()
     reps = forms.IntegerField()
     sets = forms.IntegerField()
+    exercises = forms.IntegerField()
+
+    class Meta:
+        model = models.Training
+        fields = ('reps', 'sets', 'exercise')
 
 
 class ExerciseForm(forms.ModelForm):

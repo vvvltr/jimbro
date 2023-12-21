@@ -9,6 +9,6 @@ urlpatterns = [
     path('signin', web.views.authentication_view, name='sign in'),
     path('profile', web.views.profile_view, name='profile'),
     path('logout', web.views.logout_view, name='log out'),
-    # path('workout', web.views.add_workout_view, name='add workout'),
+    path('workouts/add', web.views.add_workout_view, name='add workout'),
     path('exercises/add', web.views.add_exercise_view, name='add exercise')
 ]
