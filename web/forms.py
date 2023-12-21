@@ -28,7 +28,12 @@ class AuthenticationForm(forms.Form):
     password = forms.CharField(widget=forms.PasswordInput)
 
 class WorkoutForm(forms.ModelForm):
-    date = forms.DateTimeField(widget=forms.DateTimeInput(attrs={"type": "datetime-local"}))
+    date = forms.DateTimeField(
+        widget=forms.DateTimeInput(
+            attrs={
+                "type": "datetime-local",
+                "format": "%Y-%m-%d %H:%M'"
+            }))
     user = User
     ''' training = forms.ChoiceField(choices=[
         Training(user,
@@ -68,15 +73,8 @@ class TrainingForm(forms.ModelForm):
 
 
 class ExerciseForm(forms.ModelForm):
-    muscles = {
-        'chest',
-        'back',
-        'arms',
-        'abdominals',
-        'legs',
-        'shoulders'
-    }
-    muscle_group = forms.ChoiceField(choices=muscles)
+    muscle_group = forms.CharField()
+    # muscle_group = forms.ChoiceField(choices=('arms', 'back', 'glutes', 'hamstrings'))
     class Meta:
         model = models.Exercise
-        fields = ('title', 'muscle_group')
+        fields = ('title', 'muscle_group', 'image')

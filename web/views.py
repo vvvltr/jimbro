@@ -5,14 +5,16 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 
 from web import forms
-from web.models import User
+from web.models import User, Exercise
 
 
 # Create your views here.
 def main_view(request):
     date = datetime.now().year
+    exercises = Exercise.objects.all()
     return render(request, 'web/main.html', {
         "year": date,
+        'exercises': exercises
     })
 
 
@@ -59,14 +61,18 @@ def logout_view(request):
     return redirect('main')
 
 
-def add_exercise_view(request):
-    form = forms.ExerciseForm()
+def edit_exercise_view(request, id=None):
+    exercise = Exercise.objects.get(id=id) if id is not None else None
+    form = forms.ExerciseForm(instance=exercise)
     if request.method == "POST":
-        form = forms.WorkoutForm(data=request.POST, initial={'user': request.user})
+        form = forms.ExerciseForm(data=request.POST, files=request.FILES, instance=exercise, initial={'user': request.user})
         if form.is_valid():
             form.save()
             return redirect("main")
-    return render(request, "web/add_exercise.html", {"form": form})
+    return render(request, "web/add_exercise.html", {
+        "form": form,
+        "current_exercise": exercise
+    })
 
 
 def add_training_view(request):

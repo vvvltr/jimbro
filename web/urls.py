@@ -10,5 +10,6 @@ urlpatterns = [
     path('profile', web.views.profile_view, name='profile'),
     path('logout', web.views.logout_view, name='log out'),
     path('workouts/add', web.views.add_workout_view, name='add workout'),
-    path('exercises/add', web.views.add_exercise_view, name='add exercise')
+    path('exercises/add', web.views.edit_exercise_view, name='add exercise'),
+    path('exercises/<int:id>/edit', web.views.edit_exercise_view, name='edit exercise')
 ]

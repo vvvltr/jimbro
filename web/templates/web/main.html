@@ -3,5 +3,16 @@
 {% if not user.is_anonymous %}
         <h1>Hello, {{user.username}}!</h1>
     <a href="{% url 'add exercise' %}">Create new exercise</a>
+<h3>List of existing exercises: </h3>
+    <ul>
+        {% for exercise in exercises %}
+            <li>
+                {{ exercise.title }}
+                {{ exercise.image }}
+                <a href="{% url 'edit exercise' exercise.id %}">Edit</a>
+            </li>
+
+        {% endfor %}
+    </ul>
     {% endif %}
 {% endblock %}

@@ -1,9 +1,13 @@
 {% extends 'web/base.html' %}
 {% block content %}
 <h1>Adding new exercise</h1>
-    <form action="" method="post">
+    <form action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
+        {% if not current_exercise is None %}
+        <button>Submit changes</button>
+        {% else %}
         <button>Create</button>
+        {% endif %}
     </form>
 {% endblock %}
